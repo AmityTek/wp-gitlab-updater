@@ -52,29 +52,14 @@ class PluginUpdater extends UpdaterBase {
 	 *
 	 */
 	public function __construct( $args = [] ) {
-
-		add_action( 'admin_init', function() {
-				if( ! isset( $_GET['action'] ) || 'force_plugin_updates_check' != $_GET['action'] ) {
-				return;
-				}
-
-			if( ! current_user_can( 'install_plugins' ) ) {
-				return;
-			}
-			$this->log('pw_trigger_force_updates_check');
-
-			set_site_transient( 'update_plugins', null );
-
-			wp_safe_redirect( network_admin_url( 'update-core.php' ) ); exit;
-		});
 		// Set plugin data.
+		set_site_transient( 'update_plugins', null );
+
 		$plugin_data = ( is_multisite() ? (array) get_site_option( "wp-gitlab-updater-plugins" ) : (array) get_option( "wp-gitlab-updater-plugins" ) );
 		if ( false !== $plugin_data ) {
 			$this->plugin_data = $plugin_data;
 		}
 
-		$this->log('__construct args: ');
-		$this->log($args);
 
 		// Check if we have values.
 		if ( isset( $args['slug'] ) && isset( $args['plugin_base_name'] ) && isset( $args['access_token'] ) && isset( $args['gitlab_url'] ) && isset( $args['repo'] ) ) {
@@ -97,8 +82,6 @@ class PluginUpdater extends UpdaterBase {
 		 * transient if a new plugin version is available.
 		 */
 		add_filter( 'pre_set_site_transient_update_plugins', function ( $transient ) {
-			$this->log('pre_set_site_transient_update_plugins: ');
-			$this->log($transient);
 			$transient = $this->plugin_update( $transient );
 
 			return $transient;
@@ -166,8 +149,6 @@ class PluginUpdater extends UpdaterBase {
 			return $transient;
 		}
 
-		$this->log('plugin_data test : ');
-		$this->log($this->plugin_data);
 
 		foreach ( $this->plugin_data as $plugin ) {
 			// Get data from array which we need to build package URL.
@@ -177,13 +158,9 @@ class PluginUpdater extends UpdaterBase {
 
 			// Get tag list from GitLab repo.
 			$request = $this->fetch_tags_from_repo( $gitlab_url, $repo, $access_token );
-			$this->log("request ");
-			$this->log($request);
 
 			// Get response code of the request.
 			$response_code = wp_remote_retrieve_response_code( $request );
-			$this->log("reponse ");
-			$this->log($response_code);
 
 			// Check if request is not valid and return the $transient.
 			// Otherwise get the data body.
@@ -195,9 +172,6 @@ class PluginUpdater extends UpdaterBase {
 
 			// Decode json.
 			$data = json_decode( $response );
-
-			$this->log('json');
-			$this->log($data);
 
 			// Check if we have no tags and return the transient.
 			if ( empty( $data ) ) {
@@ -235,9 +209,6 @@ class PluginUpdater extends UpdaterBase {
 			}
 		}
 
-		$this->log('final transient');
-		$this->log($transient);
-
 		return $transient;
 	}
 
@@ -255,18 +226,5 @@ class PluginUpdater extends UpdaterBase {
     	if ($shouldNotDie) {
         	exit;
     	}
-	}
-
-	/**
- 	* Process the request to force an updates check
- 	*
- 	* @access      public
- 	* @since       1.0
- 	* @return      void
-	*/
-	public function pw_trigger_force_updates_check() {
-
-	
-
 	}
 }
