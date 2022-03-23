@@ -8,7 +8,7 @@ The script uses the GitLab tags to check for a new version.
 ## Usage as a WordPress plugin
 
 Just download the repo and upload the ZIP as a new plugin to 
-your WordPress install or use the [GitHub updater](https://github.com/afragen/github-updater) plugin.
+your WordPress install or use the [GitHub updater](https://github.com/AmityTek/github-updater) plugin.
 
 After that, you will find a new options page under *Settings* › *GitLab Updater*. There 
 you can find all installed themes and plugins, and fields to insert the needed data
@@ -41,7 +41,7 @@ into a `wp-gitlab-updater` folder. After that, you can call it like that:
 /**
  * Init the theme updater.
  */
-new Moenus\GitLabUpdater\ThemeUpdater( [
+new App\GitLabUpdater\ThemeUpdater( [
     'slug' => 'SlugOfTheTheme', 
     'access_token' => 'YourGitLabAccessToken',
     'gitlab_url' => 'URLtoGitLabInstall',
@@ -66,7 +66,7 @@ require_once 'wp-gitlab-updater/plugin-updater.php';
 /**
  * Init the plugin updater with the plugin base name.
  */
-new Moenus\GitLabUpdater\PluginUpdater( [
+new App\GitLabUpdater\PluginUpdater( [
     'slug' => 'SlugOfPlugin', 
     'plugin_base_name' => 'BaseNameOfThePlugin', 
     'access_token' => 'YourGitLabAccessToken', 

@@ -6,11 +6,11 @@
  * the theme repo. Project features like wiki and issues can be
  * hidden from external users.
  *
- * @package Moenus\GitLabUpdater
- * @author  Florian Brinkmann
+ * @package App\GitLabUpdater
+ * @author  AmityTek
  */
 
-namespace Moenus\GitLabUpdater;
+namespace App\GitLabUpdater;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
@@ -27,7 +27,7 @@ require_once 'updater-base.php';
  *
  * Class for handling theme updates from GitLab repo.
  *
- * @package Moenus\GitLabUpdater
+ * @package App\GitLabUpdater
  */
 class ThemeUpdater extends UpdaterBase {
 	/**

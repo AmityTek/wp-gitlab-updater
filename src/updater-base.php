@@ -2,11 +2,11 @@
 /**
  * Base class for GitLab updater.
  *
- * @package Moenus\GitLabUpdater
- * @author  Florian Brinkmann
+ * @package App\GitLabUpdater
+ * @author  AmityTek
  */
 
-namespace Moenus\GitLabUpdater;
+namespace App\GitLabUpdater;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {

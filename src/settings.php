@@ -2,11 +2,11 @@
 /**
  * Creates options page with settings..
  *
- * @package Moenus\GitLabUpdater
- * @author  Florian Brinkmann
+ * @package App\GitLabUpdater
+ * @author  AmityTek
  */
 
-namespace Moenus\GitLabUpdater;
+namespace App\GitLabUpdater;
 
 /**
  * If this file is called directly, abort.
@@ -41,7 +41,7 @@ class Settings {
 	public function __construct() {
 		// Create options page.
 		//
-		// @link https://github.com/afragen/github-updater/blob/develop/src/GitHub_Updater/Settings.php#L101
+		// @link https://github.com/AmityTek/github-updater/blob/develop/src/GitHub_Updater/Settings.php#L101
 		add_action( is_multisite() ? 'network_admin_menu' : 'admin_menu', [ $this, 'add_options_page' ] );
 
 		add_action( 'network_admin_edit_wp-gitlab-updater', [ $this, 'update_network_options' ] );
@@ -56,7 +56,7 @@ class Settings {
 	public function add_options_page() {
 		// Set parent page and capability.
 		//
-		// @link https://github.com/afragen/github-updater/blob/develop/src/GitHub_Updater/Settings.php#L197-L198
+		// @link https://github.com/AmityTek/github-updater/blob/develop/src/GitHub_Updater/Settings.php#L197-L198
 		$parent     = is_multisite() ? 'settings.php' : 'options-general.php';
 		$capability = is_multisite() ? 'manage_network' : 'manage_options';
 
@@ -77,14 +77,14 @@ class Settings {
 	public function create_options_page() {
 		// Set parent page and capability.
 		//
-		// @link https://github.com/afragen/github-updater/blob/develop/src/GitHub_Updater/Settings.php#L248
+		// @link https://github.com/AmityTek/github-updater/blob/develop/src/GitHub_Updater/Settings.php#L248
 		$action = is_multisite() ? 'edit.php?action=wp-gitlab-updater' : 'options.php'; ?>
 		<div class="wrap">
 			<h1><?php echo esc_html( get_admin_page_title() ); ?></h1>
 			<?php
 			// Create tabs.
 			//
-			// @link https://github.com/afragen/github-updater/blob/develop/src/GitHub_Updater/Settings.php#L219
+			// @link https://github.com/AmityTek/github-updater/blob/develop/src/GitHub_Updater/Settings.php#L219
 			$current_tab = isset( $_GET['tab'] ) ? $_GET['tab'] : 'themes';
 			if ( isset( $_GET['updated'] ) ) { ?>
 				<div id="message" class="updated notice is-dismissible">

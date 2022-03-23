@@ -2,11 +2,11 @@
 /**
  * Uninstall routine
  *
- * @package Moenus\GitLabUpdater
- * @author  Florian Brinkmann
+ * @package App\GitLabUpdater
+ * @author  AmityTek
  */
 
-namespace Moenus\GitLabUpdater;
+namespace App\GitLabUpdater;
 
 if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 	die;
